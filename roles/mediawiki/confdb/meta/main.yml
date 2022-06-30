@@ -1,0 +1,9 @@
+---
+
+# Dependances
+
+dependencies:
+  - role: "mediawiki/commun"
+
+
+

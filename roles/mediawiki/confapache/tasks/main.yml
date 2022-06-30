@@ -1,0 +1,78 @@
+---
+
+#0. Ajout du compte user-ansible dans le groupe www-data
+#   pour la gestion des droits sur l'arborescence mediawiki
+
+- name: "add user-ansible"
+  command:
+    usermod -a -G www-data user-ansible
+
+#1. Création du repertoire pour l'installation des fichiers Mediawiki
+- name: "mediawiki directory"
+  file: 
+    path: "{{mediawiki_directory}}"
+    owner: "www-data"
+    group: "www-data"
+    state: directory
+
+#2. Decompresse le fichier source archive Mediawiki et le formate sans extension 
+- name: "uncompress mediawiki archive"
+  unarchive:
+    src: "{{mediawiki_archive_url}}"
+    dest: "{{mediawiki_directory}}"
+    owner: "www-data"
+    group: "www-data"
+    remote_src: yes
+    # supprime mediawiki-1.xx.x/ du chemin
+    extra_opts: --transform=s/mediawiki-[0-9\.]*\///
+
+#3. Ajoute les droits d'ecriture pour le groupe www-data
+- name: "add g+w sur le repertoire mediawiki"
+  command:
+    chmod -R g+w {{mediawiki_directory}}
+
+#4. Exécute la tâche avec l utilisateur ansible, se place dans le répertoire
+#   de maintenance et execute la commande de configuration si le fichier
+#   LocalSettings.php n existe pas
+- name: "mediawiki configuration"
+  become: yes
+  become_user: "user-ansible"
+  args:
+    creates: "{{mediawiki_directory}}/LocaSettings.php"
+    chdir: "{{mediawiki_maintenance_directory}}"
+  command:
+    php install.php --scriptpath /{{mediawiki_name}}
+      --dbname {{mediawiki_db_name}} --lang fr
+      --dbuser {{mediawiki_db_user}}
+      --dbpass {{mediawiki_db_password}}
+      --pass {{mediawiki_admin_password}}
+      --dbserver {{mediawiki_db_host}}
+      --server http://http1
+      {{mediawiki_title}} {{mediawiki_admin_user}}
+  run_once: yes
+  delegate_to: "http1"
+  with_items: "{{groups.apache}}"
+
+#4-2. enlève la redirection localhost sur le mediawiki
+#- name: "fix mediawiki redirection"
+#  lineinfile:
+#    path: "{{mediawiki_directory}}/LocalSettings.php"
+#    regex: '\$wgServer.*'
+#    line: '$wgServer = $_SERVER["HOST"];'
+
+
+#5. Exécute la tâche avec lutilisateur ansible, se place dans le répertoire 
+#   de maintenance et exécute la commande de mise à jour de la base
+#   une seule fois
+- name: "mediawiki db update"
+  become: yes
+  become_user: "user-ansible"
+  command:
+    php update.php --quick
+  args:
+    chdir: "{{mediawiki_maintenance_directory}}"
+  # la mise a jour à besoin d'etre lancée une seule fois
+  run_once: yes
+  register: resultat
+  changed_when: "' ...done.' in resultat.stdout"
+

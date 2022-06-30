@@ -20,3 +20,7 @@ def main():
     results = cur.fetchall() 
     db.close()
 
+    module.exit_json(changed=False, resultat=results)  
+
+if __name__ == "__main__": 
+    main()

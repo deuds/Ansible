@@ -7,13 +7,13 @@ import MySQLdb
 def main(): 
     module = AnsibleModule( 
         argument_spec=dict( 
-        db_name    = dict(required=True, type=’str’), 
-        request    = dict(required=True, type=’str’), 
+        db_name    = dict(required=True, type='str'), 
+        request    = dict(required=True, type='str'),
         ) 
     )
-    
-    db_name_local = module.params.get(’db_name’) 
-    request_local = module.params.get(’request’)
+
+    db_name_local = module.params.get('db_name') 
+    request_local = module.params.get('request')
 
     db = MySQLdb.connect(db=db_name_local) 
     cur = db.cursor() 

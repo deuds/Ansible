@@ -1,4 +1,11 @@
-#### OPENCLASSROOM : "Utilisez Ansible pour automatiser vos tâches de configuration"
+### formation OPENCLASSROOM : 
+### "Utilisez Ansible pour automatiser vos tâches de configuration"
+
+
+<p align="center">
+<img src="/iMAGEs/Site.PNG">
+</p>
+
 
 ce dépot contient les fichiers résultats du suivi de la formation
 

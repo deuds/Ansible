@@ -25,3 +25,31 @@ def main():
 
 if __name__ == "__main__": 
     main()
+
+    DOCUMENTATION='''
+module: count_page
+author: Alexandre
+description: Module qui permet d'exécuter une requête SQL
+ 
+options:
+  db_name:
+	description: nom de la base de données
+	required: yes
+  request:
+	description: requête à exécuter
+	required: yes
+ 
+'''
+
+EXAMPLES='''
+- name: "SQL"
+  count_page:
+	db_name: "BDD"
+	request: "select * from user;"
+'''
+
+
+RETURN = '''
+resultat:
+	description: retourne le résultat de la requête
+'''

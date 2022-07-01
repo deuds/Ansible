@@ -26,7 +26,7 @@ def main():
 if __name__ == "__main__": 
     main()
 
-    DOCUMENTATION='''
+DOCUMENTATION='''
 module: count_page
 author: Alexandre
 description: Module qui permet d'exécuter une requête SQL
@@ -49,7 +49,7 @@ EXAMPLES='''
 '''
 
 
-RETURN = '''
+RETURN='''
 resultat:
 	description: retourne le résultat de la requête
 '''

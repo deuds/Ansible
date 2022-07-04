@@ -44,6 +44,18 @@ Serveur Apache : Machine appelée hhtp1 dans les exercices
 Serveur MariaDB : Machine appelée bdd1 dans les exercices 
 ```172.16.222.112```
 
+Les lignes suivantes ont donc été ajoutées au fichier :
+``` /etc/hosts ```
+```
+# Le node http1
+172.16.222.111  http1
+
+# Le node bdd1
+172.16.222.112  bdd1
+```
+
+
+
 ###### Le serveur proxmox est le suivant :
 
 > CPU(s) 

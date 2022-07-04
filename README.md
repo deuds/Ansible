@@ -14,16 +14,16 @@ ce dépot contient les fichiers résultats du suivi de la formation
 
 l'ensemble des fichiers sont le résultat de la formation.
 
-Sur l'ensemble de la formation de nombreuses fautes de frappe sont présentes dans les scripts et fichiers fournis par le formateur.
+Sur l'ensemble de la formation de nombreuses fautes de frappes sont présentes dans les scripts et fichiers fournis par le formateur.
 
-ils ont été corrigé suite aux logs de debug, mais également grace à "Mikael co" qui a posté un corrigé dans le forum suivant :
+ils ont été corrigés suite aux logs de debug, mais également grace à "Mikael co" qui a posté un corrigé dans le forum suivant :
 > https://openclassrooms.com/forum/sujet/cours-ansible-pb-execution-playbook-mediawiki
 
 Ce dépot contient des fichiers fonctionnels.
 
-##### Le Lab est constitué de 3 machines identiques hébergées sous un serveur Proxmox :
+#### Le Lab est constitué de 3 machines identiques hébergées sous mon serveur Proxmox :
 
-Configuration des machines :
+Voici la configuration des machines que j'ai crées :
 
 <p align="center">
 <img src="/iMAGEs/Materiel.PNG">
@@ -33,7 +33,7 @@ Configuration des machines :
 <img src="/iMAGEs/Options.PNG">
 </p>
 
-###### Les adresses IPs sont les suivantes :
+#### Les adresses IPs sont les suivantes :
 
 Node-Master : Machine hébegeant Ansible 
 ```172.16.222.110```
@@ -44,7 +44,7 @@ Serveur Apache : Machine appelée hhtp1 dans les exercices
 Serveur MariaDB : Machine appelée bdd1 dans les exercices 
 ```172.16.222.112```
 
-Les lignes suivantes ont donc été ajoutées au fichier :
+Les lignes suivantes ont donc été ajoutées aux fichiers :
 ``` /etc/hosts ```
 ```
 # Le node http1
@@ -56,7 +56,7 @@ Les lignes suivantes ont donc été ajoutées au fichier :
 
 
 
-###### Le serveur proxmox est le suivant :
+#### Mon serveur proxmox est le suivant :
 
 > CPU(s) 
 > 8 x Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz (1 Socket)
